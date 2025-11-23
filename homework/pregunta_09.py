@@ -24,3 +24,21 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    import csv
+    ruta="files/input/data.csv"
+    with open(ruta, newline="",encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter='\t')
+        rows = list(reader)
+        Columna_5 = [fila[4] for fila in rows]
+    Diccionarios= []
+    for i in Columna_5:
+        Diccionarios.append(i.split(","))
+    Claves_contador= {}
+    for j in Diccionarios:
+        for k in j:
+            clave,valor= k.split(":")
+            if clave not in Claves_contador:
+                Claves_contador[clave]= 1
+            else:
+                Claves_contador[clave] += 1
+    return Claves_contador

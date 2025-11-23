@@ -26,3 +26,32 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    import csv
+    ruta="files/input/data.csv"
+    with open(ruta, newline="",encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter='\t')
+        rows = list(reader)
+        Columna_3 = [fila[2] for fila in rows]
+    Columna_separada= []
+    for i in Columna_3:
+        fecha= i.split("-")
+        Columna_separada.append(fecha)
+    Meses= []
+    for j in Columna_separada:
+        Meses.append(j[1])
+    def contador_mes(mes):
+        contador=0
+        for k in Meses:
+            if k == mes:
+                contador += 1
+        return contador
+    Resultado= []
+    for l in Meses:
+        contador_mes(l)
+        tupla= (l,contador_mes(l))
+        if tupla not in Resultado:
+            Resultado.append(tupla) 
+    Resultado.sort()
+
+    return Resultado
+print(pregunta_04())

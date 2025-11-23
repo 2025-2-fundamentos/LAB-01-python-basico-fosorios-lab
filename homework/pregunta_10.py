@@ -20,3 +20,21 @@ def pregunta_10():
 
 
     """
+    import csv
+    ruta="files/input/data.csv"
+    with open(ruta, newline="",encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter='\t')
+        rows = list(reader)
+        Columna_1 = [fila[0] for fila in rows]
+        Columna_4 = [fila[3] for fila in rows]
+        Columna_5 = [fila[4] for fila in rows]
+    Resultado= []
+    for i in range(len(Columna_1)):
+        letra= Columna_1[i]
+        elementos_col4= Columna_4[i].split(",")
+        elementos_col5= Columna_5[i].split(",")
+        cantidad_col4= len(elementos_col4)
+        cantidad_col5= len(elementos_col5)
+        tupla= (letra,cantidad_col4,cantidad_col5)
+        Resultado.append(tupla)
+    return Resultado

@@ -26,3 +26,28 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    import csv
+    ruta="files/input/data.csv"
+    with open(ruta, newline="",encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter='\t')
+        rows = list(reader)
+        Columna_5 = [fila[4] for fila in rows]
+    Diccionarios= []
+    for i in Columna_5:
+        Diccionarios.append(i.split(","))
+    Claves_valores= {}
+    for j in Diccionarios:
+        for k in j:
+            clave,valor= k.split(":")
+            if clave not in Claves_valores:
+                Claves_valores[clave]= [int(valor)]
+            else:
+                Claves_valores[clave].append(int(valor))
+    Resultado= []
+    for l in Claves_valores:
+        minimo= min(Claves_valores[l])
+        maximo= max(Claves_valores[l])
+        tupla= (l,minimo,maximo)
+        Resultado.append(tupla)
+    Resultado.sort()
+    return Resultado

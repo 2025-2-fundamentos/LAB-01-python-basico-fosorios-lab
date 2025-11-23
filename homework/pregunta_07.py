@@ -25,3 +25,24 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    import csv
+    ruta="files/input/data.csv"
+    with open(ruta, newline="",encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter='\t')
+        rows = list(reader)
+        Columna_1 = [fila[0] for fila in rows]
+        Columna_2 = [fila[1] for fila in rows]
+    Valores_letras= {}
+    for i in range(len(Columna_2)):
+        valor= int(Columna_2[i])
+        letra= Columna_1[i]
+        if valor not in Valores_letras:
+            Valores_letras[valor]= [letra]
+        else:
+            Valores_letras[valor].append(letra)
+    Resultado= []
+    for j in Valores_letras:
+        tupla= (j,Valores_letras[j])
+        Resultado.append(tupla)
+    Resultado.sort()
+    return Resultado
